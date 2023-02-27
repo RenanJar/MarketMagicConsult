@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 public class ClientService {
 
     public String concatenateUrl (String url, String string){
-        return url.concat(string);
+        String stringtreated = string.replace(" ","+");
+        return url.concat(stringtreated);
     }
 }

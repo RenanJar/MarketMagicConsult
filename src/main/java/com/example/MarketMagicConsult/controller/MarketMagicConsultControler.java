@@ -1,20 +1,18 @@
 package com.example.MarketMagicConsult.controller;
 
+import com.example.MarketMagicConsult.DTO.VerifiedObjectsDTO;
+import com.example.MarketMagicConsult.client.FlowStoreClient;
+import com.example.MarketMagicConsult.service.ConsultService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/consultmarket")
 public class MarketMagicConsultControler {
 
-    @GetMapping("/ok")
-    public ResponseEntity<String> consult(){
-        return ResponseEntity.ok("OKKOKOKOKOKOKOK");
-    }
-
-    /*
     @Autowired
     private ConsultService consultService;
 
@@ -24,13 +22,10 @@ public class MarketMagicConsultControler {
     @Autowired
     private VerifiedObjectsDTO verifiedObjectsDTO;
 
-
-
-  @PostMapping("/flowStoreConsult")
+    @PostMapping("/flowstoreconsult")
     public ResponseEntity<VerifiedObjectsDTO> consultListObjectsFlowStore(@RequestBody List<String> listObjects){
         verifiedObjectsDTO = consultService.objectScanner(listObjects,flowStoreClient,"bt_comprar");
-        System.out.print(verifiedObjectsDTO.getObjectsFound().toString());
         return ResponseEntity.ok(verifiedObjectsDTO);
-    }*/
+}
 
 }
