@@ -24,7 +24,7 @@ public class MarketMagicConsultControler {
 
     @PostMapping("/flowstoreconsult")
     public ResponseEntity<VerifiedObjectsDTO> consultListObjectsFlowStore(@RequestBody List<String> listObjects){
-        verifiedObjectsDTO = consultService.objectScanner(listObjects,flowStoreClient,"bt_comprar");
+
         return ResponseEntity.ok(verifiedObjectsDTO);
 }
 

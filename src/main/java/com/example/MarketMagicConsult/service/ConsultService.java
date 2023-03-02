@@ -12,33 +12,4 @@ import java.util.List;
 @Service
 public class ConsultService {
 
-    @Autowired
-    FlowStoreClient flowStoreClient;
-
-    @Autowired
-    VerifiedObjectsDTO verifiedObjectsDTO;
-
-    public VerifiedObjectsDTO objectScanner(List<String> objectList,FlowStoreClient documentHtml,String validator){
-
-        List<String> objectsFound = new ArrayList<>();
-        List<String> objectsNotFound = new ArrayList<>();
-
-        objectList.stream().forEach((item)->{
-
-            String responseHtml = documentHtml.getFlowStore(item);
-            System.out.println(responseHtml);
-            if(responseHtml.contains(validator)){
-                objectsFound.add(item);}
-            else{
-                objectsNotFound.add(item);
-            }
-
-        });
-
-        verifiedObjectsDTO.setObjectsFound(objectsFound);
-        verifiedObjectsDTO.setObjectsNotFound(objectsNotFound);
-
-        return verifiedObjectsDTO;
-    }
-
 }
