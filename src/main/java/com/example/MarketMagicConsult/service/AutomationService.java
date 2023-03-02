@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,9 @@ public class AutomationService {
 
         System.setProperty("webdriver.chrome.driver", "/snap/bin/chromium.chromedriver");
 
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+
         WebDriver webDriver = new ChromeDriver(
                 (ChromeDriverService)(new ChromeDriverService.Builder() {
                     @Override
@@ -48,7 +52,7 @@ public class AutomationService {
                             return super.findDefaultExecutable();
                         }
                     }
-                }).build());
+                }).build(),options);
 
         webDriver.get(marketInputs.getUrl());
         webDriver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
