@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,9 @@ import java.util.concurrent.TimeUnit;
 public class AutomationService {
     @Autowired
     private MarketInputs marketInputs;
+    @Autowired
+    private Logger logger;
+
     private CommonService commonService = new CommonService();
 
     public VerifiedObjectsDTO automationSearch(MarketInputs marketInputs,List<String> listObjects){
@@ -36,6 +40,7 @@ public class AutomationService {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
+        options.addArguments("--remote-allow-origins=*");
 
         WebDriver webDriver = new ChromeDriver(
                 (ChromeDriverService)(new ChromeDriverService.Builder() {
@@ -72,12 +77,15 @@ public class AutomationService {
                 List<WebElement> objectName = webDriver.findElements(By.xpath(marketInputs.getLabelObjectsName()));
                 if (objectName.isEmpty()) {
                     objectsNotFound.add(item);
+                    logger.info(item+" NotFound");
+
                 } else {
                     WebElement objectValue = webDriver.findElement(By.xpath(marketInputs.getPriceLabel()));
                     CardDTO cardDTO = new CardDTO();
                     cardDTO.setName(item);
                     cardDTO.setPrice(commonService.StringToBigDecimalValue(objectValue.getText()));
                     objectsFound.add(cardDTO);
+                    logger.info(item+" Found");
                 }
                 objectName.clear();
             } catch (NoSuchElementException e) {

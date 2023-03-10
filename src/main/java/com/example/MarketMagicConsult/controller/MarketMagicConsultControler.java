@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/consultmarket")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MarketMagicConsultControler {
     @Autowired
     private VerifiedObjectsDTO verifiedObjectsDTO;
@@ -26,7 +27,7 @@ public class MarketMagicConsultControler {
         marketInputs.setUrl("https://www.flowstore.com.br/");
         marketInputs.setImputFields("//input[@class='form-control inp_busca']");
         marketInputs.setPriceLabel("//div[@class='preco_com_desconto']");
-        marketInputs.setLabelObjectsName("//div[@class='nomes_cards']");
+        marketInputs.setLabelObjectsName("//*[@class='btn btn-light-green product--btn']");
 
         return ResponseEntity.ok(automationService.automationSearch(marketInputs,listObjects));
 }
